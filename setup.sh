@@ -20,6 +20,10 @@ spinner() {
     printf "    \b\b\b\b"
 }
 
+# load ~/.bashrc with aliases
+chmod +x ./aliases.sh
+./aliases.sh
+
 # make a dev directory in home
 mkdir ~/dev
 
@@ -29,6 +33,10 @@ sudo apt upgrade -y & spinner
 
 # install common unix utilities
 sudo apt install -y build-essential file git jq tree & spinner
+
+# Setup git name and email
+git config --global user.email "max@maxlareau.com"
+git config --global user.name "Max"
 
 # install networking utilities
 sudo apt install -y curl net-tools nmap & spinner
@@ -59,12 +67,13 @@ sudo usermod -aG docker ${USER} & spinner
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv & spinner
 pyenv install 3.10 & spinner
 pyenv global 3.10 & spinner
+source ~/.bashrc
 
 # setup pyenv $PATH, then refresh bashrc
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-source ~/.bashrc & spinner
+source ~/.bashrc
 
 # install GitHub client (gh)
 sudo snap install gh & spinner
