@@ -64,16 +64,10 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo usermod -aG docker ${USER} & spinner
 
 # install PyEnv, then Python and pip
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv & spinner
+curl https://pyenv.run | bash & spinner
+source ~/.bashrc
 pyenv install 3.10 & spinner
 pyenv global 3.10 & spinner
-source ~/.bashrc
-
-# setup pyenv $PATH, then refresh bashrc
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-source ~/.bashrc
 
 # install GitHub client (gh)
 sudo snap install gh & spinner
