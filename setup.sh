@@ -41,7 +41,7 @@ nvm use 18.14 & spinner
 
 # install Docker
 sudo apt update & spinner
-sudo apt install ca-certificates curl gnupg & spinner
+sudo apt install -y ca-certificates curl gnupg & spinner
 sudo install -m 0755 -d /etc/apt/keyrings & spinner
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg & spinner
 sudo chmod a+r /etc/apt/keyrings/docker.gpg & spinner
@@ -49,6 +49,8 @@ echo \
     "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null & spinner
+sudo apt update & spinner
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin & spinner
 
 # Add user to docker group
 sudo usermod -aG docker ${USER} & spinner
